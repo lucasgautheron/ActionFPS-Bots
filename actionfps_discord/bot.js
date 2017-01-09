@@ -4,8 +4,6 @@ var EventSource = require('eventsource');
 
 client.login('MjY3Mzg1NzE0NTM3MjY3MjAw.C1Le8Q.N-sO7Ybfwc9w0BRMb1whWrRUtrk');
 
-//var interSource = new EventSource("http://woop.ac:81/actionfps/inters/");
-
 var interSource = new EventSource("https://actionfps.com/inters/");
 
 var serverUpdateSource = new EventSource("https://actionfps.com/server-updates/");
@@ -16,7 +14,6 @@ function countPlayers(server) {
   var players =  new Array();
   var index = 0;
   console.log('In countPlayers');
-  //console.log(server);
   if( typeof server !== 'undefined') {
     if(typeof server.players !== 'undefined') {
       server.players.forEach(function(teams) {
@@ -24,7 +21,6 @@ function countPlayers(server) {
         index++;
       });
     } else {
-      //console.log(Object.keys(server.teams).length);
       server.teams.forEach(function(teams) {
         for (var i = 0; i < teams.players.length; i++) {
           players[index] = teams.players[i].name;
@@ -45,10 +41,7 @@ client.on('ready', () => {
     console.log("event inter");
     var inter = JSON.parse(e.data);
     var msg = '';
-    //console.log(inter);
     var server = servers[inter.serverConnect];
-    //console.log("Avant playercount");
-    //console.log(server);
     var onlinePlayers = countPlayers(server);
     if( typeof servers[inter['serverConnect']] !== 'undefined') {
       var connect = servers[inter['serverConnect']].now.server.connectName;
@@ -67,8 +60,6 @@ client.on('ready', () => {
 
   serverUpdateSource.addEventListener('current-game-status', function(e) {
     var server = JSON.parse(e.data);
-    //console.log('Received data for : ' + server.now.server.server);
-    //console.log(server.now.server.server);
     servers[server.now.server.server] = server;
   }, false);
 
