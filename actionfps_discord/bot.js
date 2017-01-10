@@ -10,7 +10,7 @@ var serverUpdateSource = new EventSource("https://actionfps.com/server-updates/"
 
 var servers = new Array();
 
-function countPlayers(server) {
+function getPlayers(server) {
   var players =  new Array();
   var index = 0;
   console.log('In countPlayers');
@@ -42,15 +42,18 @@ client.on('ready', () => {
     var inter = JSON.parse(e.data);
     var msg = '';
     var server = servers[inter.serverConnect];
-    var onlinePlayers = countPlayers(server);
+    var onlinePlayers = getPlayers(server);
     if( typeof servers[inter['serverConnect']] !== 'undefined') {
       var connect = servers[inter['serverConnect']].now.server.connectName;
       msg = '@everyone ' + inter.playerName + ' started an inter and is looking for players ```/connect ' + connect + '```' + onlinePlayers.length + ' players online';
-      msg+='```';
-      onlinePlayers.forEach(function(value){
-        msg+=value + ' ';
-      });
-      msg+='```';
+      
+      if(onlinePlayers.length > 0) {
+        msg+='```';
+        onlinePlayers.forEach(function(value){
+          msg+=value + ' ';
+        });
+        msg+='```';
+      }
       console.log(msg);
       interChan.sendMessage(msg)
          .then(message => console.log(`Bot : ${message.content}`))
