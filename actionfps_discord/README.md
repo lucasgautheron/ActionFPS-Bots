@@ -39,6 +39,11 @@ Do not care about the unmet peer dependencies
 ```
 $ npm install eventsource
 ```
+##### Install confortable
+```
+$ npm install confortable
+```
+
 ## Getting started
 
 ##### Run the script
