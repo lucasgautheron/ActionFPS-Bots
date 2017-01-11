@@ -33,6 +33,7 @@ $ git clone https://github.com/Paul255/ActionFPS-Bots.git
 $ cd ActionFPS-Bot/actionfps_discord/
 $ npm install discord.js --save
 ```
+Do not care about the unmet peer dependencies
 
 ##### Install eventsource
 ```
