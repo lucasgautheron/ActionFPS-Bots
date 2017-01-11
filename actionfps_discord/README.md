@@ -44,6 +44,13 @@ $ npm install eventsource
 $ npm install confortable
 ```
 
+#### Create a token.json file in the same directory
+``` 
+{
+  "token": "yourlongtoken"
+}
+```
+
 ## Getting started
 
 ##### Run the script
